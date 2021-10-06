@@ -7,18 +7,19 @@ using namespace std;
 
 template<typename T>
 class Complex{
-    template<typename T2> friend ostream& operator<<(ostream&, Complex<T2>&);
+    template<typename T2> friend ostream& operator<<(ostream&,const Complex<T2>&);
     template<typename T2> friend istream& operator>>(istream&, Complex<T2>&);
+
     private:
         T real;
         T imaginary;
     public:
         Complex(T=0,T=0);
         ~Complex();
-        T operator+(Complex&);
-        T operator-(Complex&);
-        T operator*(Complex&);
-        T operator/(Complex&);
+        Complex<T> operator+(Complex&);
+        Complex<T> operator-(Complex&);
+        Complex<T> operator*(Complex&);
+        Complex<T> operator/(Complex&);
 //        bool operator==(Complex&,Complex &);
 //        bool operator!=(Complex&,Complex &);
 
@@ -36,20 +37,20 @@ Complex<T>::~Complex(){
     cout << "Object was destructed!" << endl;
 }
 template<typename T>
-T Complex<T>::operator+(Complex<T>& c){
+Complex<T> Complex<T>::operator+(Complex<T>& c){
     return Complex(this->real + c.real,this->imaginary + c.imaginary);
 }
 template<typename T>
-T Complex<T>::operator-(Complex<T>& c){
+Complex<T> Complex<T>::operator-(Complex<T>& c){
     return Complex(this->real - c.real,this->imaginary - c.imaginary);
 }
 template<typename T>
-T Complex<T>::operator*(Complex<T>& c){
+Complex<T> Complex<T>::operator*(Complex<T>& c){
     return Complex((this->real * c.real - this->imaginary * c.imaginary)
                   ,(this->imaginary * c.real + this->real * c.imaginary));
 }
 template<typename T>
-T Complex<T>::operator/(Complex<T>& c){
+Complex<T> Complex<T>::operator/(Complex<T>& c){
     return Complex((this->real * c.real + this->imaginary * c.imaginary)/(c.real * c.real + c.imaginary * c.imaginary),
                    (this->imaginary * c.real - this->real * c.imaginary)/(c.real * c.real + c.imaginary * c.imaginary));
 }
@@ -69,7 +70,7 @@ bool operator!=(Complex<T>& c1,Complex<T>& c2){
 }
 */
 template<typename T>
-ostream& operator<<(ostream& os, Complex<T>& c){
+ostream& operator<<(ostream& os,const Complex<T>& c){
     os << "Real: " << c.real << endl;
     os << "Imaginary: " << c.imaginary << endl;
     return os;

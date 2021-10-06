@@ -8,9 +8,8 @@ int main()
     Complex<int> a(20,10);
     Complex<int> b(20,10);
     cin >> a;
-
-    cout << a + b << endl;
-
+    cin >> b;
+    cout<<a*b<<endl;
 
     return 0;
 }
